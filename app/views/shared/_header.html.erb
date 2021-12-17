@@ -1,0 +1,23 @@
+<header class='top-page-header'>
+  <div class='search-bar-contents'>
+    <%= search_form_for Item.ransack(params[:q]), url: search_items_path, html: {class: "search-form"} do |f| %>
+      <%= f.text_field :name, placeholder: '商品名から探す', class: 'input-box' %>
+      <br>
+      <%= f.label :submit, class: "search-button" do %>
+        <input type="submit" value="検索" class="send">
+        <%= f.submit :submit, id: "q_submit", style: "display: none;"%>
+      <% end %>
+    <% end %>
+  </div>
+  <div class='nav'>
+    <ul class='lists-right'>
+      <% if user_signed_in? %>
+      <li class="user_name" >ユーザー名： <%= "#{current_user.nickname}" %></li>
+      <li class="logout" ><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+      <li class="login"><%= link_to 'ログイン', new_user_session_path %></li>
+      <li class="sign-up"><%= link_to '新規登録', new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</header>
